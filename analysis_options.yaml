@@ -1,0 +1,13 @@
+# Análise estática do projeto: `flutter analyze` (roda também no CI).
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    # Documenta a intenção de cada API pública nova.
+    - always_declare_return_types
+    # Evita `new`/`this.` redundantes e outros ruídos de leitura.
+    - prefer_final_locals
+    - unnecessary_lambdas
+    - use_super_parameters
+    # Ordem previsível dos imports, para diffs menores em PRs.
+    - directives_ordering
