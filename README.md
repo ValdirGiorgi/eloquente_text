@@ -10,6 +10,9 @@ que você preferir. Selecione um texto em qualquer aplicativo, aperte
 `Ctrl+Shift+F`, escolha o tom e a finalidade, e receba a versão revisada —
 tudo em português brasileiro.
 
+> 📖 A história por trás do projeto, com os detalhes de implementação:
+> [Eloquente Text: humanize e reescreva textos com IA](https://blog.valdir.dev.br/eloquente-text)
+
 ## Funcionalidades
 
 - **Atalho global (`Ctrl+Shift+F`)** — captura o texto selecionado em

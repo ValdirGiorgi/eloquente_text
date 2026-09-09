@@ -24,10 +24,10 @@ void showAppAboutDialog(BuildContext context) {
               style: FluentTheme.of(
                 dialogContext,
               ).typography.caption?.copyWith(
-                color: FluentTheme.of(
-                  dialogContext,
-                ).resources.textFillColorSecondary,
-              ),
+                    color: FluentTheme.of(
+                      dialogContext,
+                    ).resources.textFillColorSecondary,
+                  ),
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
