@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 
 import '../../../ai/provider_catalog.dart';
+import '../../../models/language.dart';
 import '../../../models/purpose.dart';
 import '../../../models/tone.dart';
 import '../../common/labeled_combo_box.dart';
@@ -69,6 +70,14 @@ class GenerationOptions extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          const SizedBox(height: 12),
+          LabeledComboBox<Language>(
+            label: 'Idioma de Saída',
+            value: controller.language,
+            items: Language.values,
+            itemLabel: (language) => language.label,
+            onChanged: controller.selectLanguage,
           ),
         ],
       ),

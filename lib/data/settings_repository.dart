@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import '../ai/provider_catalog.dart';
+import '../models/language.dart';
 import '../models/model_config.dart';
 import '../models/purpose.dart';
 import '../models/tone.dart';
@@ -25,6 +26,7 @@ class SettingsRepository {
   static const String _providerKey = 'current_provider';
   static const String _toneKey = 'last_tone';
   static const String _purposeKey = 'last_purpose';
+  static const String _languageKey = 'last_language';
   static const String _humanizeKey = 'last_humanize';
   static const String _apiKeyPrefix = 'apikey_';
   static const String _defaultModelPrefix = 'model_';
@@ -147,6 +149,12 @@ class SettingsRepository {
 
   Future<void> saveLastPurpose(Purpose purpose) =>
       _write(_purposeKey, purpose.label);
+
+  Future<Language> lastLanguage() async =>
+      Language.fromLabel(await _read(_languageKey)) ?? Language.portuguese;
+
+  Future<void> saveLastLanguage(Language language) =>
+      _write(_languageKey, language.label);
 
   Future<bool> humanizeEnabled() async => await _read(_humanizeKey) == 'true';
 

@@ -8,6 +8,7 @@ import 'package:eloquente_text/data/history_repository.dart';
 import 'package:eloquente_text/data/settings_repository.dart';
 import 'package:eloquente_text/data/stats_repository.dart';
 import 'package:eloquente_text/models/ai_response.dart';
+import 'package:eloquente_text/models/language.dart';
 import 'package:eloquente_text/models/model_config.dart';
 import 'package:eloquente_text/models/purpose.dart';
 import 'package:eloquente_text/models/tone.dart';
@@ -129,11 +130,18 @@ void main() {
     test('guarda as últimas escolhas da tela principal', () async {
       await settings.saveLastTone(Tone.friendly);
       await settings.saveLastPurpose(Purpose.whatsApp);
+      await settings.saveLastLanguage(Language.spanish);
       await settings.saveHumanizeEnabled(true);
 
       expect(await settings.lastTone(), Tone.friendly);
       expect(await settings.lastPurpose(), Purpose.whatsApp);
+      expect(await settings.lastLanguage(), Language.spanish);
       expect(await settings.humanizeEnabled(), isTrue);
+    });
+
+    test('usa português como idioma padrão enquanto nada foi escolhido',
+        () async {
+      expect(await settings.lastLanguage(), Language.portuguese);
     });
   });
 

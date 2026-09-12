@@ -9,6 +9,7 @@ import '../../data/history_repository.dart';
 import '../../data/settings_repository.dart';
 import '../../data/stats_repository.dart';
 import '../../models/ai_response.dart';
+import '../../models/language.dart';
 import '../../models/purpose.dart';
 import '../../models/tone.dart';
 
@@ -37,6 +38,7 @@ class HomeController extends ChangeNotifier {
 
   Tone tone = Tone.formal;
   Purpose purpose = Purpose.professionalEmail;
+  Language language = Language.portuguese;
   bool humanize = false;
 
   AiProviderKind provider = AiProviderKind.fallback;
@@ -56,6 +58,7 @@ class HomeController extends ChangeNotifier {
   Future<void> loadSettings() async {
     tone = await _settings.lastTone();
     purpose = await _settings.lastPurpose();
+    language = await _settings.lastLanguage();
     humanize = await _settings.humanizeEnabled();
     provider = await _settings.selectedProvider();
     await _loadModels();
@@ -103,6 +106,12 @@ class HomeController extends ChangeNotifier {
     await _settings.saveLastPurpose(newPurpose);
   }
 
+  Future<void> selectLanguage(Language newLanguage) async {
+    language = newLanguage;
+    notifyListeners();
+    await _settings.saveLastLanguage(newLanguage);
+  }
+
   Future<void> setHumanize(bool enabled) async {
     humanize = enabled;
     notifyListeners();
@@ -141,6 +150,7 @@ class HomeController extends ChangeNotifier {
           text: text,
           tone: tone,
           purpose: purpose,
+          language: language,
           temperature: await _settings.temperatureFor(provider, selectedModel),
           humanize: humanize,
         ),

@@ -1,3 +1,4 @@
+import '../models/language.dart';
 import '../models/purpose.dart';
 import '../models/tone.dart';
 import 'prompts/system_prompt.dart';
@@ -13,6 +14,7 @@ class EnhanceRequest {
     required this.text,
     required this.tone,
     required this.purpose,
+    this.language = Language.portuguese,
     this.temperature,
     this.humanize = false,
   });
@@ -20,13 +22,15 @@ class EnhanceRequest {
   final String text;
   final Tone tone;
   final Purpose purpose;
+  final Language language;
 
   /// `null` deixa o provedor usar a temperatura padrão da própria API.
   final double? temperature;
 
   final bool humanize;
 
-  String get systemPrompt => buildSystemPrompt(humanize: humanize);
+  String get systemPrompt =>
+      buildSystemPrompt(language: language, humanize: humanize);
 
   String get userPrompt =>
       buildUserPrompt(text: text, tone: tone, purpose: purpose);
